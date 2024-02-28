@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Book Inventory">
+    <Key>
+      <PropertyRef Name="ISBN" />
+    </Key>
+    <Property Name="ISBN" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LibraryDB.dbo.Member' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="First Name" />
+      <PropertyRef Name="Last Name" />
+      <PropertyRef Name="Phone Number" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="First Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Last Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone Number" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="LibraryDBModelStoreContainer">
+    <EntitySet Name="Book Inventory" EntityType="Self.Book Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Member].[ID] AS [ID], 
+    [Member].[First Name] AS [First Name], 
+    [Member].[Last Name] AS [Last Name], 
+    [Member].[Phone Number] AS [Phone Number]
+    FROM [dbo].[Member] AS [Member]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
